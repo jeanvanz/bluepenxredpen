@@ -1,4 +1,5 @@
 import pygame
+import random
 pygame.init()
 bluepen=pygame.image.load('bluepen.png')
 bluepeninvertido=pygame.transform.flip(bluepen,True,False)
@@ -16,7 +17,7 @@ posicaoXblue=400
 posicaoYblue=300
 movimentoXblue=0
 movimentoYblue=0
-posicaoXred=0
+posicaoXred=1
 posicaoYred=300
 velocidade=1
 direita=True
@@ -43,5 +44,27 @@ while running:
     tela.blit(redpen,(posicaoXred,posicaoYred))
     posicaoXblue=posicaoXblue+movimentoXblue
     posicaoYblue=posicaoYblue+movimentoYblue
+    if posicaoXblue>=710:
+        posicaoXblue=710
+    elif posicaoXblue<=0:
+        posicaoXblue=0
+    if posicaoYblue>=500:
+        posicaoYblue=500
+    elif posicaoYblue<=0:
+        posicaoYblue=0
+    if posicaoXred>=800:
+        direita=False
+        redpen=pygame.transform.flip(redpen,True,False)
+        velocidade=velocidade+1
+        posicaoYred=random.randint(0,600)
+    elif posicaoXred<=-100:
+        direita=True
+        redpen=pygame.transform.flip(redpen,True,False)
+        velocidade=velocidade+1
+        posicaoYred=random.randint(0,600)
+    if direita:
+        posicaoXred=posicaoXred+velocidade
+    else:
+        posicaoXred=posicaoXred-velocidade
     pygame.display.update()
     clock.tick(60)
