@@ -1,5 +1,6 @@
 import pygame
 import random
+
 pygame.init()
 bluepen=pygame.image.load('bluepen.png')
 bluepeninvertido=pygame.transform.flip(bluepen,True,False)
@@ -12,7 +13,9 @@ tela=pygame.display.set_mode(tamanho)
 icon=pygame.image.load('bluepen.ico')
 pygame.display.set_icon(icon)
 pygame.display.set_caption('Blue Pen x Red Pen')
-running=True
+branco=(255,255,255)
+fonte=pygame.font.Font(None,30)
+pontos=0
 posicaoXblue=400
 posicaoYblue=300
 movimentoXblue=0
@@ -21,6 +24,8 @@ posicaoXred=1
 posicaoYred=300
 velocidade=1
 direita=True
+
+running=True
 while running:
     for evento in pygame.event.get():
         if evento.type==pygame.QUIT or evento.type==pygame.KEYDOWN and evento.key==pygame.K_ESCAPE:
@@ -57,14 +62,18 @@ while running:
         redpen=pygame.transform.flip(redpen,True,False)
         velocidade=velocidade+1
         posicaoYred=random.randint(0,600)
+        pontos=pontos+1
     elif posicaoXred<=-100:
         direita=True
         redpen=pygame.transform.flip(redpen,True,False)
         velocidade=velocidade+1
         posicaoYred=random.randint(0,600)
+        pontos=pontos+1
     if direita:
         posicaoXred=posicaoXred+velocidade
     else:
         posicaoXred=posicaoXred-velocidade
+    texto=fonte.render('Pontos: '+str(pontos),True,branco)
+    tela.blit(texto,(10,10))
     pygame.display.update()
     clock.tick(60)
