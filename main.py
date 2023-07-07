@@ -61,18 +61,29 @@ while running:
         direita=False
         redpen=pygame.transform.flip(redpen,True,False)
         velocidade=velocidade+1
-        posicaoYred=random.randint(0,600)
+        posicaoYred=random.randint(0,540)
         pontos=pontos+1
     elif posicaoXred<=-100:
         direita=True
         redpen=pygame.transform.flip(redpen,True,False)
         velocidade=velocidade+1
-        posicaoYred=random.randint(0,600)
+        posicaoYred=random.randint(0,540)
         pontos=pontos+1
     if direita:
         posicaoXred=posicaoXred+velocidade
     else:
         posicaoXred=posicaoXred-velocidade
+
+    pixelXblue=list(range(posicaoXblue,posicaoXblue+100))
+    pixelYblue=list(range(posicaoYblue,posicaoYblue+100))
+    pixelXred=list(range(posicaoXred,posicaoXred+100))
+    pixelYred=list(range(posicaoYred,posicaoYred+100))
+    pixelXtotal=len(list(set(pixelXblue) & set(pixelXred)))
+    pixelYtotal=len(list(set(pixelYblue) & set(pixelYred)))
+    if pixelYtotal>50:
+        if pixelXtotal>30:
+            running=False
+
     texto=fonte.render('Pontos: '+str(pontos),True,branco)
     tela.blit(texto,(10,10))
     pygame.display.update()
