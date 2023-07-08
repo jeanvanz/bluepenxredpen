@@ -24,7 +24,8 @@ posicaoXred=1
 posicaoYred=300
 velocidade=1
 direita=True
-
+pygame.mixer.music.load('cupid.mp3')
+pygame.mixer.music.play(-1)
 running=True
 while running:
     for evento in pygame.event.get():
